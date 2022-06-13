@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, User } = require('../../models');
+const { Post, User, Comment } = require('../../models');
 
 // GET all posts
 router.get('/', (req, res) => {
@@ -11,6 +11,15 @@ router.get('/', (req, res) => {
         order: [['created_at', 'DESC']], 
         // Notice that the include property is expressed as an array of objects. To define this object, we need a reference to the model and attributes. 
         include: [
+               // include the Comment model here:
+            {
+                model: Comment,
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+                include: {
+                  model: User,
+                  attributes: ['username']
+                }
+              },
             {
                 model: User,
                 attributes: ['username']
@@ -33,6 +42,15 @@ router.get('/:id', (req, res) => {
         },
         attributes: ['id', 'post_url', 'title', 'created_at'],
         include: [
+            // include the Comment model here:
+            {
+                model: Comment,
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+                include: {
+                  model: User,
+                  attributes: ['username']
+                }
+              },
             {
                 model: User,
                 attributes: ['username']

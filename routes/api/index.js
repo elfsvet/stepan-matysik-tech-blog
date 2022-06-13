@@ -10,8 +10,12 @@ const router = require('express').Router();
 const userRoutes = require('./user-routes.js');
 // assign the postRoutes
 const postRoutes = require('./post-routes.js');
+//  import the comment-routes.js module
+const commentRoutes = require('./comment-routes.js');
 
+// instruct the router instance to use modules 
 router.use('/users', userRoutes);
 router.use('/posts', postRoutes);
+router.use('/comments', commentRoutes);
 
 module.exports = router;

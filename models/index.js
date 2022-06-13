@@ -2,6 +2,8 @@
 const User = require('./User');
 // collecting and exporting the Post model data.
 const Post = require('./Post');
+// collecting and exporting the Comment model data.
+const Comment = require('./Comment');
 // Now we can define our model associations
 // create associations
 User.hasMany(Post, {
@@ -19,5 +21,24 @@ Post.belongsTo(User, {
     onDelete: 'cascade',
   });
 
+  Comment.belongsTo(User, {
+    foreignKey: 'user_id',
+    onDelete: 'cascade',
 
-module.exports = { User, Post };
+  });
+  
+  Comment.belongsTo(Post, {
+    foreignKey: 'post_id',
+    onDelete: 'cascade',
+  });
+  
+  User.hasMany(Comment, {
+    foreignKey: 'user_id'
+  });
+  
+  Post.hasMany(Comment, {
+    foreignKey: 'post_id'
+  });
+
+
+module.exports = { User, Post, Comment };
