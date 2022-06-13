@@ -170,3 +170,15 @@ In this lesson, you learned how to do the following tasks:
 - Create a login route for authentication.
 
 
+- Create the Post Model
+
+- models/sometimes know as schemas/ orm - speed up : reduce mistakes, reduce amount of code and protect database from vulnerabilities.
+benefits of models 
+auto-building of tables
+data validation and restriction
+create relationships among data
+it's all written in JS
+models many-to-many relationships, migrations, hooks, instance methods, static methods
+- create post model
+- require post model in index.js inside the models folder
+auto generated columns created at and updated_at not null.
