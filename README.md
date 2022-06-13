@@ -118,3 +118,55 @@ Created a user table using Sequelize models.
 
 Created all of the server endpoints using RESTful API standards to work with the user model’s data.
 
+- use bcrypt package in node js
+bcrypt is an adaptive hash function based on a cryptographic algorithm that provides additional security measures like a salt to protect against certain attack strategies. To learn what a salt is and how bcrypt works, refer to
+- npm i bcrypt
+
+Can you think of a reason why it is recommended to run the password hashing step as an async function although a sync version is also available?
+
+The hashing done by bcrypt is CPU intensive, so the sync version will block other functions from running, effectively stalling the application until the hashing process has been completed.
+
+- use the hooks to hash the password
+Thankfully, we can use special Sequelize functions called "hooks" in the model. Also known as "lifecycle events", hooks are functions that are called before or after calls in Sequelize.
+
+Good thing there is another method to handle async functions that will make the code more concise and legible. We will use the async/await syntax to replace the Promise.
+
+Let's replace the function above using Promises with the new version of the exact same functionality with the async/await syntax,
+
+- Hash the Password During the Update
+- we will need to add the option { individualHooks: true }.
+- Create the Login Route for Authentication
+we need to usee post for login not get.
+
+In this case, a login route could've used the GET method since it doesn't actually create or insert anything into the database. But there is a reason why a POST is the standard for the login that's in process.
+
+A GET method carries the request parameter appended in the URL string, whereas a POST method carries the request parameter in req.body, which makes it a more secure way of transferring data from the client to the server. Remember, the password is still in plaintext, which makes this transmission process a vulnerable link in the chain.
+
+post new(/login)
+
+http://localhost:3001/api/users/login with body 
+{
+	"email":"stepan@gmail.com",
+	"password":"stepan1234"
+}
+
+- Compare the Hashed Password
+Why is async mode recommended over sync mode?
+
+If you are using bcrypt on a simple script, using the sync mode is perfectly fine. However, if you are using bcrypt on a server, the async mode is recommended. This is because the hashing done by bcrypt is CPU intensive, so the sync version will block the event loop and prevent your application from servicing any other inbound requests or events. The async version uses a thread pool which does not block the main event loop.
+
+In Object Oriented Programming, an instance method returns or makes use of information (i.e., properties) specific to that particular object. (Remember that objects generated from classes are instances of the class.)
+
+As we can see, the response from the application has verified the user's credentials and logged in to the application successfully.
+
+In this lesson, you learned how to do the following tasks:
+
+- Incorporate a password hashing algorithm package to encode stored user passwords.
+
+- Intervene during the create and update operations using hooks in the model.
+
+- Use instance methods to compare user passwords in the login process.
+
+- Create a login route for authentication.
+
+
