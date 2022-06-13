@@ -17,8 +17,11 @@ const bcrypt = require('bcrypt');
 // create our User model
 class User extends Model {
     // set up method to run on "instance" data (per user) to check password 13.2
-    checkPassword(loginPw) {
-      return bcrypt.compareSync(loginPw, this.password);
+    //! need to write async functions here to use on server
+    // async in the same time. not stopping another processes
+    async checkPassword(loginPw) {
+      const response = await bcrypt.compare(loginPw, this.password);
+      return response;
     }
   }
 

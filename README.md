@@ -182,3 +182,75 @@ models many-to-many relationships, migrations, hooks, instance methods, static m
 - create post model
 - require post model in index.js inside the models folder
 auto generated columns created at and updated_at not null.
+
+- Define Model Associations
+
+First, think about how the relationship between the User and the Post model will work. A user can make many posts. But a post only belongs to a single user, and never many users. By this relationship definition, we know we have a one-to-many relationship.
+
+in models folder in index.js
+
+Previously, we created the associations between models on the database layer in the schema using SQL. In that case, we had to drop the table and then create it again so the associations would be implemented.
+
+Do we have to do the same drop/create process to the tables because we created the associations on the application layer this time?
+
+Yes, we do. These association changes will not take affect in the User table, because there isn't a way to make changes to the table dynamically. We will need to drop the table and create a new one in order for the associations to take affect. But Sequelize does have a way to dynamically drop the table and create a new one to overwrite existing tables and establish the new associations.
+
+Now we are ready to test our Post model. The next step will be to build our post routes.
+
+- Create API routes for the Post Model
+
+Are you starting to notice a pattern in how we're building application?
+
+This is great for instructional learning, so we can demonstrate and test the application iteratively. However, this isn't necessarily the most efficient way to develop a web app. Many seasoned developers would argue that it makes more sense to build each section of the app at a time to lessen the cognitive jumping around. For instance, creating all the models at once could help inform the data associations and relationships better. This makes a degree of sense due to the fact that much of the code between these files is quite similar. The same goes for the routes.
+
+- Get All the Posts
+Why did we include the User model for the post-routes?
+
+In a query to the post table, we would like to retrieve not only information about each post, but also the user that posted it. With the foreign key, user_id, we can form a JOIN, an essential characteristic of the relational data model.
+
+Why do we get created_at and username columns in this query since they are not in the Post model?
+
+The created_at column is auto-generated at the time a post is created with the current date and time, thanks to Sequelize. We do not need to specify this column or the updated_at column in the model definition, because Sequelize will timestamp these fields by default unless we configure Sequelize not to.
+
+One more step is needed to ensure that the post routes have been properly set up. What must we do with the routes we create in post-routes.js so they are exposed properly with the correct URL path? That's right—we need to assign the postRoutes to the Express.js router.
+
+mysql -u root -p
+After that, type your MySQL password to access the mysql shell.
+
+Once the mysql shell is connected to the mysql server, we need to connect to the correct database. Type in the following command into the mysql command prompt:
+
+mysql> use just_tech_news_db;
+The following message will confirm this command was successful:
+
+Database changed
+Into the mysql prompt, type the following statements to insert an entry into the post table:
+
+INSERT INTO post (title, post_url, user_id, created_at, updated_at)
+VALUES ("Taskmaster goes public!", "https://taskmaster/press", 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+- GET a Single Post
+
+In the Promise, we included an error message in case the id wasn't found. The 404 status message relays what error type to the client?
+
+The 404 status code identifies a user error and will need a different request for a successful response.
+
+get http://localhost:3001/api/posts/1
+
+- Create a Post
+
+Do you notice any key distinctions between the request made above and the SQL INSERT INTO query that we made in the MySQL shell?
+
+We did not assign the created_at or updated_at fields in req.body.
+
+Can you reason why this is the case? In the SQL shell when we made our first seed, we were making a query directly to the MySQL database. Therefore if any constraints on any field are not fulfilled, an error will occur. Remember, the created_at and updated_at constraints stated that these fields cannot be empty or NOT NULL.
+
+Then why does this constraint error not occur in the request made through Insomnia?
+
+This is because of what Sequelize does for our application under the hood. The values for these fields are assigned automatically with CURRENT_TIMESTAMP values, which allows us to not include it on the request.
+
+We are almost finished with this lesson and we only have two more routes to go!
+
+- Update a Post's Title
+
+- Delete a Post
+
