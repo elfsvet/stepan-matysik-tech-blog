@@ -48,3 +48,73 @@ THEN I am signed out of the site
 
 WHEN I am idle on the site for more than a set time
 THEN I am able to view comments but I am prompted to log in again before I can add, update, or delete comments
+
+
+first steps: 
+- npm init -y
+add .gitignore with node_modules and .DS_Store and .env
+Write "start": "node server.js"
+check "main" : "server.js"
+create server.js
+create  folders models,routes and config and db.
+- run : npm install express sequelize mysql2
+<!-- we installing multiple libraries in one step. -->
+after creating of the database
+run : mysql -u root -p
+and : source db/schema.sql
+
+to check if all went right run in mysql: show databases;
+and quit mysql: quit;
+
+- create the database connection create file connection in config folder. We would need to call Sequelize connection constructor.
+
+- protect sensitive information by installing dotenv package.
+npm i dotenv
+
+- create .env file and add  credentials(name of database, username,password)
+
+we need to load them into the connection.js file.
+
+- create the user model
+- create the index.js in models
+- create CRUD api routes
+give the user some REST(Representational State Transfer) RESTful APIs
+create 5 routes to perform CRUD operations.
+
+- Hook up the server
+create index.js in routes/api folder
+- create index.js in the routes folder.
+
+- set up the server.js file
+- Test and Refine the User Routes
+
+in insomnia try to crud requests.
+
+ - protect the passwords
+In user-routes.js, update the .findAll() method in the GET to exclude the password column
+attribute: {
+    exclude: ['password']
+}
+
+The steps we followed in this lesson are the same ones developers take regularly:
+
+Model the data.
+
+Set up API routes to work with that data.
+
+Test the routes to make sure everything works as intended.
+
+Repeat with new model.
+
+Now, we haven't completed that last step yet, but we will!
+
+To recap, we accomplished the following in this lesson:
+
+Set up the application to use Sequelize to manage SQL data.
+
+Used environment variables to protect the sensitive data.
+
+Created a user table using Sequelize models.
+
+Created all of the server endpoints using RESTful API standards to work with the user model’s data.
+

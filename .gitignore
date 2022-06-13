@@ -105,3 +105,5 @@ dist
 
 # ignore environment files
 .env
+
+.DS_Store
