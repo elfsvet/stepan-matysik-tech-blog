@@ -394,3 +394,93 @@ Now let's return to the browser and test it. Log in, then try navigating to the 
 Now that we've given users the ability to log in, we should probably allow them to log out as well. This will entail destroying the session variables and resetting the cookie.
 
 Since logout won’t be an actual page that users can visit, it should be a button, but we can still style it to look like a link.
+
+Let's recap what you accomplished in this lesson:
+
+Used Express.js and Sequelize to implement sessions.
+
+Managed front-end JavaScript logic in an MVC app.
+
+Next, you’ll use these tools to create a single post page where logged-in users can comment and upvote on posts.
+
+At the same time, you'll learn how to do the following new tasks:
+
+Use session data within a template.
+
+Write conditionals to change a template's layout.
+
+- Create a Single-Post Template
+
+- Add Upvote Functionality (we skip it.)
+
+- Add Comment Functionality
+add javascript comment.js
+
+- Conditionally Render the Form Elements
+
+helpers in handlebars
+The {{#if}} helper checks truthy values only, so you couldn't write something like {{#if x === y}}.
+
+{{#if loggedIn}}
+<script src="/javascript/comment.js"></script>
+{{/if}}End of code snippet
+Now the errors should go away! Test out the app again by logging in and out a few times, verifying that the form elements appear and disappear accordingly.
+
+In the next section, we'll look at other areas where we could use {{#if}} helpers.
+
+- Conditionally Render the Login Links
+Wait—we made these changes in the main layout, but we're only passing loggedIn to the single-post.handlebars template. Fortunately, variables that are passed to view templates are automatically passed to the main layout. Thus, the single-post page is already good to go. We just need to update the homepage route to do the same.
+
+Use session data in a template file.
+
+Write conditionals using Handlebars.js syntax.
+
+Implement helper functions in Handlebars.js.
+
+Use Handlebars.js partials to templatize duplicate HTML.
+
+- Create a Partial for Post Information
+
+Let's start here: what exactly is a partial?
+
+A "partial" is a templating technique that isn't unique to Handlebars.js. Just like templates help minimize the repeated code across pages, partials help minimize the repeated code across templates. With partials, we can extract smaller components from a template to reuse in other templates.
+
+Oops! It looks like things aren't working yet. That's because post-info.handlebars doesn't know what post refers to. When we pass the post object into the partial, we don't pass the object as is but rather pass in all of the properties of that object.
+
+This works in a similar way to destructuring the properties of an object in a function’s parameters. Consider the following code:
+```
+function doSomething({name, description}) {
+  console.log(post); // prints "undefined"
+}
+const post = {name: 'test post', description: 'a test post'};
+doSomething(post);
+```
+This code would give us an error because doSomething() has no knowledge of the keyword post.
+
+Fantastic, it seems to be working again. That may seem like a lot of work just to get things to look exactly the same, but remember that the gain here is modularity. Now we can make the code much more maintainable, and any future template that uses this partial will only need a single line of code! Let's consider where else we could use partials.
+
+- Create a Partial for Comments
+
+Once again, it won't work yet, because the partial is trying to reference post.comments. Well, in this case we have to do something different, because the comments array can't be destructured into an easily accessed variable name.
+
+In Handlebars.js, we can use the trusty keyword this to refer to the parent object or array that's available in the context of the partial. Data that's passed to a template file is technically always part of this, but when dealing with objects, we can simply access the object properties directly (e.g., vote_count instead of this.vote_count). Because arrays don't have named properties like objects do, we're forced to access the array as this.
+
+Let's go ahead and update the comments partial to use this, as shown in the following code:
+
+- Write and Fulfill Test for Date Formats
+
+Helpers allow us to add small bits of logic or data manipulation to the template itself. In this case, we want to format data, like dates, from within Handlebars.js. To do so, we'll add a custom helper function to the Handlebars.js app.
+
+Because helpers are essentially just functions, we can actually unit test them.
+
+Let's get Jest installed first by running
+- npm i jest -D.
+
+Now let's write the accompanying function for that code. In a new folder called utils/, create a file named helpers.js. In this file, we'll export a function that makes the test pass. The following code block shows what this should look like:
+
+- Write and Fulfill Test for Plural Words
+
+- Write and Fulfill Test for URL Formats
+
+- Add Helper Functions to Handlebars.js
+

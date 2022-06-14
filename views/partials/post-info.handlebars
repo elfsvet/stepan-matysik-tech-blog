@@ -1,0 +1,14 @@
+{{!-- we would need to use just post keys. we don;t need to referencing the post object like post.post_url --}}
+{{!-- to use partial in other handlebars we can insert it by {{> name_of_the_partial argument_for_each_loop_set_up_in_partial }} --}}
+<article class="post">
+  <div class="title">
+    <a href="{{post_url}}" target="_blank">{{title}}</a>
+    <span>({{format_url post_url}})</span>
+  </div>
+  <div class="meta">
+    by {{user.username}} on
+    {{format_date created_at}}
+    |
+    <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
+  </div>
+</article>

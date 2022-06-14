@@ -1,0 +1,20 @@
+{{> post-info post}}
+{{!-- we sent it in the object with post array. --}}
+{{#if loggedIn}}
+<form class="comment-form">
+  <div>
+    <textarea name="comment-body"></textarea>
+  </div>
+
+  <div>
+    <button type="submit">add comment</button>
+  </div>
+</form>
+{{/if}}
+{{!-- to use partial in other handlebars we can insert it by {{> name_of_the_partial argument_for_each_loop_set_up_in_partial }} --}}
+{{> comments post.comments}}
+
+{{!-- The front end never received a <form class="comment-form"> element, but it still loaded the JavaScript files that look for those. Because comment.js is only useful to users who can see those elements (i.e., logged-in users), we should just not load those resources. --}}
+{{#if loggedIn}}
+<script src="/javascript/comment.js"></script>
+{{/if}}

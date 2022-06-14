@@ -8,7 +8,14 @@ const path = require('path');
 // express-handlebars
 const exphbs = require('express-handlebars');
 // handlebars
-const hbs = exphbs.create({});
+// const hbs = exphbs.create({});
+
+// To implement the helper, we need to start telling Handlebars.js about the helpers file. Open server.js and import the helper functions with the following line:
+const helpers = require('./utils/helpers');
+
+// Then pass the helpers to the existing exphbs.create() statement as the following code shows:
+
+const hbs = exphbs.create({ helpers });
 // set up express.js session and connect the session to our Sequelize database.
 const session = require('express-session');
 

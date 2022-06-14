@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,29 +8,41 @@
     <title>Tech Blog</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
+
 <body>
     <div class="wrapper">
         <header>
             <h1>
-              <a href="/">The Tech Blog</a>  
+                <a href="/">The Tech Blog</a>
             </h1>
             <nav>
                 <a href="/">Home</a>
                 <a href="/dashboard">Dashboard</a>
-                <a href="/login">Login</a>
-                {{!-- Since logout won’t be an actual page that users can visit, it should be a button, but we can still style it to look like a link. --}}
+                {{!-- variables that are passed to view templates are automatically passed to the main layout. We did it in the single-post template --}}
+                {{#if loggedIn}}
+                {{!-- Since logout won’t be an actual page that users can visit, it should be a button, but we can still
+                style it to look like a link. --}}
                 <button id="logout" class="btn-no-style">Logout</button>
+                {{else}}
+                <a href="/login">Login</a>
+                {{/if}}
             </nav>
         </header>
         <main>
-            {{!-- Hey, we're back to writing regular HTML again! Notice that there's a special placeholder in the <main> element: {{{ body }}}. This is Handlebars.js syntax for data that will be plugged in later. In this case, the data will be another, smaller template, like the contents of the homepage. --}}
-            {{{body}}}
-        </main>
-        <footer>
-            Thanks for visiting!
-        </footer>
+            {{!-- Hey, we're back to writing regular HTML again! Notice that there's a special placeholder in the <main>
+                element: {{{ body }}}. This is Handlebars.js syntax for data that will be plugged in later. In this
+                case, the data will be another, smaller template, like the contents of the homepage. --}}
+                {{{body}}}
+            </main>
+            <footer>
+                Thanks for visiting!
+            </footer>
     </div>
     {{!-- to be able to logout --}}
-      <script src="/javascript/logout.js"></script>
+    {{!-- if user not logged in we don't need it script to through the error. --}}
+    {{#if loggedIn}}
+    <script src="/javascript/logout.js"></script>
+    {{/if}}
 </body>
+
 </html>
