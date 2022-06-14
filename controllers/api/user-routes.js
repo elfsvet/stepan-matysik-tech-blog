@@ -60,7 +60,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
-// POST /api/users
+// POST create a user /api/users
 router.post('/', (req, res) => {
     //     INSERT INTO users
     //   (username, email, password)
@@ -73,7 +73,18 @@ router.post('/', (req, res) => {
         email: req.body.email,
         password: req.body.password
     })
-        .then(dbUserData => res.json(dbUserData))
+        // This gives our server easy access to the user's user_id, username, and a Boolean describing whether or not the user is logged in.
+        .then(dbUserData => {
+            // We want to make sure the session is created before we send the response back, so we're wrapping the variables in a callback. The req.session.save() method will initiate the creation of the session and then run the callback function once complete.
+            req.session.save(() => {
+                // declare session variables
+                req.session.user_id = dbUserData.id;
+                req.session.username = dbUserData.username;
+                req.session.loggedIn = true;
+                //   run the callback function
+                res.json(dbUserData);
+            });
+        })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
@@ -106,12 +117,35 @@ router.post('/login', (req, res) => {
             res.status(400).json({ message: 'Incorrect password!' });
             return;
         }
-        //   However, if there is a match, the conditional statement block is ignored, and a response with the data and the message "You are now logged in." is sent instead. 13.2
+        // We want to make sure the session is created before we send the response back, so we're wrapping the variables in a callback. The req.session.save() method will initiate the creation of the session and then run the callback function once complete.
+        req.session.save(() => {
+            // declare session variables
+            req.session.user_id = dbUserData.id;
+            req.session.username = dbUserData.username;
+            req.session.loggedIn = true;
+            //   run the callback function
+            //   However, if there is a match, the conditional statement block is ignored, and a response with the data and the message "You are now logged in." is sent instead. 13.2
 
-        res.json({ user: dbUserData, message: 'You are now logged in!' });
-
+            res.json({ user: dbUserData, message: 'You are now logged in!' });
+        });
     });
 });
+//  /logout route
+router.post('/logout', (req, res) => {
+    // to delete the session
+    // if user logged in and session has it to true, delete the session
+    if (req.session.loggedIn) {
+        req.session.destroy(() => {
+            // 204 No Content
+            res.status(204).end();
+        });
+    }
+    else {
+        // session not loggedIn 
+        res.status(404).end();
+    }
+});
+
 
 // PUT /api/users/1
 router.put('/:id', (req, res) => {

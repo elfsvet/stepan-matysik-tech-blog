@@ -176,3 +176,34 @@
     padding: 1%;
     font-size: 110%;
   } */
+
+  * {
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    color: #333;
+    background-color: rgb(123, 229, 123);
+  }
+
+nav{
+  background-color: rgb(74, 176, 74);
+  
+}
+/* Since logout won’t be an actual page that users can visit, it should be a button, but we can still style it to look like a link. */
+.btn-no-style {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+  color: #225ca3;
+  font-size: 100%;
+  font-weight: bold;
+  transition: color .1s;
+  margin-left: 16px;
+}

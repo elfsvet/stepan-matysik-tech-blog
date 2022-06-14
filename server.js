@@ -9,15 +9,35 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 // handlebars
 const hbs = exphbs.create({});
+// set up express.js session and connect the session to our Sequelize database.
+const session = require('express-session');
 
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+const sess = {
+    // Super secret secret" should be replaced by an actual secret and stored in the .env file.
+    secret: 'Super secret secret',
+    // cookie object empty
+    // If we wanted to set additional options on the cookie, like a maximum age, we would add the options to that object.
+    cookie: {},
+    // resave set false forses back to be save int the session store
+    resave: false,
+    // save unitialialized true
+    saveUninitialized: true,
+    // store new SequelizeStore
+  store: new SequelizeStore({
+    db: sequelize
+  })
+};
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
+app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // built-in Express.js middleware function that can take all of the contents of a folder and serve them as static assets. This is useful for front-end specific files like images, style sheets, and JavaScript files.

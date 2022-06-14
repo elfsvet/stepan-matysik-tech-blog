@@ -359,3 +359,38 @@ the template engine allows us to empower htmp with JS power.
 
 - use serialize get method
 - use helpers like {{#each}}{{/each}}
+
+- Create a Login Page
+What's the next step we need to take to be able to test this in the browser?
+
+We need a route that renders the page!
+
+- Add Front-End Logic to Forms
+Remember to give the absolute path, not the relative file path.
+
+Okay, now that we've verified that the request was successful, let's add some error handling to the front end. Instead of chaining then() and catch(), however, we'll use an ES6 feature called async/await.
+
+Async/await acts as "syntactic sugar" for our code, much like ES6 classes, and help make our Promises more readable. To help asynchronous code use async/await, we first add the keyword async to the function that wraps our asynchronous code.
+
+From a readability standpoint, this is very helpful because it tells us, "This function does something asynchronous!" Go ahead and add async before function signupFormHandler()
+
+- Create a Session on the Back End
+
+Sessions allow our Express.js server to keep track of which user is making a request, and store useful data about them in memory.
+Sessions are extremely common in everyday apps like banking applications and social media apps.
+This is helpful, but what do you do if this session ever gets terminated? We need to somehow store information about the session on the user's client. We can do so by using HTTP cookies, commonly referred to as simply cookies.
+Do not store sensitive information like passwords in cookies.
+
+- npm i express-session connect-session-sequelize
+
+The express-session library allows us to connect to the back end. The connect-session-sequelize library automatically stores the sessions created by express-session into our database.
+
+We want to make sure the session is created before we send the response back, so we're wrapping the variables in a callback. The req.session.save() method will initiate the creation of the session and then run the callback function once complete.
+
+Now let's return to the browser and test it. Log in, then try navigating to the login route. You should be automatically redirected to the homepage. You can even restart the server and it still works!
+
+- Add Logic to Destroy the Session
+
+Now that we've given users the ability to log in, we should probably allow them to log out as well. This will entail destroying the session variables and resetting the cookie.
+
+Since logout won’t be an actual page that users can visit, it should be a button, but we can still style it to look like a link.

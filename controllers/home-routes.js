@@ -3,7 +3,9 @@ const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Post, User, Comment } = require('../models');
 
+// gets the homepage with all posts and comments
 router.get('/', (req, res) => {
+  console.log(req.session);
   // Previously, we used res.send() or res.sendFile() for the response. Because we've hooked up a template engine, we can now use res.render() and specify which template we want to use. In this case, we want to render the homepage.handlebars template (the .handlebars extension is implied). This template was light on content; it only included a single <div>. Handlebars.js will automatically feed that into the main.handlebars template, however, and respond with a complete HTML file.
   // The res.render() method can accept a second argument, an object, which includes all of the data you want to pass to your template. In home-routes.js, update the homepage route to look like the following code:
   Post.findAll({
@@ -39,5 +41,19 @@ router.get('/', (req, res) => {
       res.status(500).json(err);
     });
 });
+
+// get the login page open
+// logic route
+router.get('/login', (req, res) => {
+  // check for a session and redirect to the homepage if one exists by adding the following code:
+  // if in object session loggedIn assign to true.
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+  // the difference here. we don't need to pass in any variables. that's why we don't use the second argument like we did in Post.findAll
+  res.render('login');
+});
+
 
 module.exports = router;
