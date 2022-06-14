@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Comment, User, Post } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
     console.log('==================');
@@ -31,7 +32,7 @@ router.get('/', (req, res) => {
         });
 });
 
-router.post('/', (req, res) => {
+router.post('/',withAuth, (req, res) => {
     // check the session
     // was req.session not stopping adding comment for non logged in user
     if (req.session.loggedIn) {
@@ -49,7 +50,7 @@ router.post('/', (req, res) => {
     }
   });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     Comment.destroy(
         {
             where: { id: req.params.id }

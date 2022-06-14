@@ -17,9 +17,10 @@
             </h1>
             <nav>
                 <a href="/">Home</a>
-                <a href="/dashboard">Dashboard</a>
                 {{!-- variables that are passed to view templates are automatically passed to the main layout. We did it in the single-post template --}}
                 {{#if loggedIn}}
+                {{!-- a link to the dashboard page --}}
+                <a href="/dashboard">Dashboard</a>
                 {{!-- Since logout won’t be an actual page that users can visit, it should be a button, but we can still
                 style it to look like a link. --}}
                 <button id="logout" class="btn-no-style">Logout</button>

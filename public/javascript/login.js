@@ -10,7 +10,7 @@ async function signupFormHandler(event) {
         const response = await fetch('/api/users', {
             //! check if it's important to keep it uppercase
             // doesn't matter here. still posted a user.
-            method: 'post',
+            method: 'POST',
             body: JSON.stringify({
                 username,
                 email,
@@ -47,7 +47,7 @@ async function loginFormHandler(event) {
       });
   
       if (response.ok) {
-        document.location.replace('/');
+        document.location.replace('/dashboard');
       } else {
         alert(response.statusText);
       }

@@ -6,6 +6,9 @@
 // Use the proper HTTP status codes like 400, 404, and 500 to indicate errors in a request.
 const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
+const withAuth = require('../../utils/auth');
+
+
 
 // GET /api/users
 router.get('/', (req, res) => {
@@ -131,7 +134,7 @@ router.post('/login', (req, res) => {
     });
 });
 //  /logout route
-router.post('/logout', (req, res) => {
+router.post('/logout', withAuth, (req, res) => {
     // to delete the session
     // if user logged in and session has it to true, delete the session
     if (req.session.loggedIn) {
@@ -148,7 +151,7 @@ router.post('/logout', (req, res) => {
 
 
 // PUT /api/users/1
-router.put('/:id', (req, res) => {
+router.put('/:id',withAuth, (req, res) => {
 
     //     UPDATE users
     // SET username = "Lernantino", email = "lernantino@gmail.com", password = "newPassword1234"
@@ -178,7 +181,7 @@ router.put('/:id', (req, res) => {
 });
 
 // DELETE /api/users/1
-router.delete('/:id', (req, res) => {
+router.delete('/:id',withAuth, (req, res) => {
     User.destroy({
         where: {
             id: req.params.id

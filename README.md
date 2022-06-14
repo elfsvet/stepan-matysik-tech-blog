@@ -484,3 +484,21 @@ Now let's write the accompanying function for that code. In a new folder called 
 
 - Add Helper Functions to Handlebars.js
 
+Used helper functions to format strings within a Handlebars.js template.
+
+Consolidated duplicate HTML code into Handlebars.js partials.
+
+With homepage views completed, we can now focus on the final portion of the app—the dashboard view. Soon users will be able to create, update, and delete posts!
+
+- Create the Dashboard Template
+
+- Protect Routes with Middleware
+
+Let's try this out with our own middleware function that can authguard routes. To authguard a route means to restrict it to authenticated users only.
+
+In the utils folder, create a new file called auth.js and populate it with the
+
+With this middleware in place, you can easily protect (i.e., authguard) other routes. You wouldn't want non-authenticated users making POST, PUT, and DELETE requests to your server, so it would be a good idea to authguard those routes as well. To do that, go through your /api controller files and add the withAuth() middleware to all non-GET API routes.
+
+- Create an Edit Post Page
+- Hook Up the Front-End Logic
