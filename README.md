@@ -357,3 +357,5 @@ Previously, we used res.send() or res.sendFile() for the response. Because we've
 - Create the Homepage Template
 the template engine allows us to empower htmp with JS power.
 
+- use serialize get method
+- use helpers like {{#each}}{{/each}}
