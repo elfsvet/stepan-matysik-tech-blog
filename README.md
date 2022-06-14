@@ -300,3 +300,60 @@ Protected user passwords by hashing with the bcrypt package.
 Set up the groundwork for user authentication.
 
 Performed raw SQL queries using Sequelize literals.
+
+- We need MVC paradigm Model-View-Controller
+separation of concerns 
+constroller(requests/DATA/ Express.js will tie it all together and handle the functionality)|model(business objects/MySQL database through Sequelize)|view(UI and interaction/ Handlebars.js will dynamically generate HTML)
+
+Structure your application following the Model-View-Controller (MVC) paradigm.
+
+Modularize your code into separate folders for your Models, View, and Controllers to enforce separation of concerns.
+
+Render dynamic HTML for your views using the Handlebars.js template engine.
+
+Implement user authentication.
+
+Configure Heroku so that you can deploy your application using a MySQL database.
+
+Render dynamic HTML using the Handlebars.js template engine.
+
+Explain and implement MVC modularization in a full-stack web application.
+
+Configure Heroku for deployment of an application using MySQL.
+
+Explain the interaction between the Model, View, and Controller.
+
+Explain separation of concerns and its benefits.
+
+Implement user authentication.
+
+- Set Up the Template Engine
+There are many template engines available, and their concepts and syntax are all pretty similar. To learn more, see the list of Express.js-compliant template engines that the Express.js team maintains (https://github.com/expressjs/express/wiki#template-engines).
+
+- Set Up the Handlebars Template Engine
+
+npm install express-handlebars
+
+
+- Introducing the Model-View-Controller Paradigm
+
+Why does Handlebars.js require a views folder? Why can't this be named something else? The reason for this is that Handlebars.js is meant to fit into an existing architectural paradigm called Model-View-Controller, or MVC.
+
+MVC is a popular software-design pattern that organizes your app into the three following separate concerns:
+MVC - architectural design pattern
+
+Models: the core data of your app
+
+Views: the UI components, such as your HTML layouts
+
+Controllers: the link between your models and views
+
+- Set Up MVC
+
+Previously, we used res.send() or res.sendFile() for the response. Because we've hooked up a template engine, we can now use res.render() and specify which template we want to use. In this case, we want to render the homepage.handlebars template (the .handlebars extension is implied). This template was light on content; it only included a single <div>. Handlebars.js will automatically feed that into the main.handlebars template, however, and respond with a complete HTML file.
+
+- View the Homepage
+
+- Create the Homepage Template
+the template engine allows us to empower htmp with JS power.
+

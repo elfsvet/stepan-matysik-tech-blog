@@ -5,22 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Blog</title>
-    <link rel="stylesheet" href="/stylesheet/style.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 <body>
-    <div>
+    <div class="wrapper">
         <header>
             <nav>
+                <a href="/">Home</a>
                 <a href="/dashboard">Dashboard</a>
-                <button id="logout">Logout</button>
                 <a href="/login">Login</a>
-            </nav>
+                <button id="logout">Logout</button>
             <h1>
-                The Tech Blog
+              <a href="/">The Tech Blog</a>  
             </h1>
+            </nav>
         </header>
         <main>
-
+            {{!-- Hey, we're back to writing regular HTML again! Notice that there's a special placeholder in the <main> element: {{{ body }}}. This is Handlebars.js syntax for data that will be plugged in later. In this case, the data will be another, smaller template, like the contents of the homepage. --}}
+            {{{body}}}
         </main>
         <footer>
             Thanks for visiting!
