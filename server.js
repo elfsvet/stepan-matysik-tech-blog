@@ -16,36 +16,36 @@ const helpers = require('./utils/helpers');
 // Then pass the helpers to the existing exphbs.create() statement as the following code shows:
 
 const hbs = exphbs.create({ helpers });
+const app = express();
+const PORT = process.env.PORT || 3001;
 // set up express.js session and connect the session to our Sequelize database.
 const session = require('express-session');
 
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const sess = {
-    // Super secret secret" should be replaced by an actual secret and stored in the .env file.
-    secret: 'Super secret secret',
-    // cookie object empty
-    // !If we wanted to set additional options on the cookie, like a maximum age, we would add the options to that object.
-    // sets a idle timeout for the session to logout after the time
-    cookie: {maxAge: 1 * 60 * 60 * 1000 }, // 1 hours
-    // resave set false forses back to be save int the session store
-    resave: false,
-    // save unitialialized true
-    saveUninitialized: true,
-    // store new SequelizeStore
+  // Super secret secret" should be replaced by an actual secret and stored in the .env file.
+  secret: 'Super secret secret',
+  // cookie object empty
+  // !If we wanted to set additional options on the cookie, like a maximum age, we would add the options to that object.
+  // sets a idle timeout for the session to logout after the time
+  cookie: { maxAge: 1 * 60 * 60 * 1000 }, // 1 hours
+  // resave set false forses back to be save int the session store
+  resave: false,
+  // save unitialialized true
+  saveUninitialized: true,
+  // store new SequelizeStore
   store: new SequelizeStore({
     db: sequelize
   })
 };
 
-const app = express();
-const PORT = process.env.PORT || 3001;
 
+app.use(session(sess));
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // built-in Express.js middleware function that can take all of the contents of a folder and serve them as static assets. This is useful for front-end specific files like images, style sheets, and JavaScript files.
@@ -64,5 +64,6 @@ app.use(routes);
 // The other thing to notice is the use of {force: false} in the .sync() method. This doesn't have to be included, but if it were set to true, it would drop and re-create all of the database tables on startup. This is great for when we make changes to the Sequelize models, as the database would need a way to understand that something has changed. We'll have to do that a few times throughout this project, so it's best to keep the {force: false} there for now.
 
 sequelize.sync({ force: false })
-.then(() => {
-    app.listen(PORT, ()=>console.log(`Now listening on port: 🌎 ${PORT} 🌎`))});
+  .then(() => {
+    app.listen(PORT, () => console.log('Now listening'))
+  });
