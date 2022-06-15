@@ -1,7 +1,7 @@
 # Stepan Matysik's Tech Blog (MVC)
 
 > MVC project. A link to the deployed Model-View-Controller project.
-> Live demo [_here_](https://youtu.be/jxYPww3Sres). 
+> Live demo [_here_](https://secret-springs-76339.herokuapp.com/). 
 
 ## Table of contents
 * [General info](#general-info)
@@ -36,7 +36,7 @@ code .
 ```
 
 ## Instructions
-Open the link and try to read the posts login/sing up and create a post / comment / update and delete. You hava 1 hour active session. You would need to log in again
+Open the [link](https://secret-springs-76339.herokuapp.com/) and try to read the posts login/sing up and create a post / comment / update and delete. You hava 1 hour active session. You would need to log in again
 
 ## Features
 - Sequelize package
