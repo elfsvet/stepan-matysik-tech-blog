@@ -2,17 +2,13 @@
 {{!-- to use partial in other handlebars we can insert it by {{> name_of_the_partial
 argument_for_each_loop_set_up_in_partial }} --}}
 <article class="card">
-
   <div class="card-header">
-    <a class="link" href="/post/{{id}}">{{title}}</a>
+    <a class="link" href="/dashboard/edit/{{id}}">{{title}}</a>
   </div>
-
   <div class="card-body">
     <p>{{content}}</p>
   </div>
-
   <div class="card-footer">
     <span>Posted by {{user.username}} on {{format_date created_at}}</span>
   </div>
-
 </article>

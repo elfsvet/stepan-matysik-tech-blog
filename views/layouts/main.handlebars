@@ -7,30 +7,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Blog</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+
 </head>
 
 <body>
     <div>
         <header>
-            <nav>
-                <a href="/">Home</a>
+            <nav class="nav">
+                <a href="/" class="nav-link">Home</a>
                 {{!-- variables that are passed to view templates are automatically passed to the main layout. We did it
                 in the single-post template --}}
                 {{#if loggedIn}}
                 {{!-- a link to the dashboard page --}}
-                <a href="/dashboard">Dashboard</a>
+                <a href="/dashboard" class="nav-link">Dashboard</a>
                 {{!-- Since logout won’t be an actual page that users can visit, it should be a button, but we can still
                 style it to look like a link. --}}
-                <button id="logout" class="btn-no-style">Logout</button>
+                <a href="/" class="nav-link" id="logout">Logout</a>
                 {{else}}
-                <a href="/login">Login</a>
+                <a href="/login" class="nav-link">Login</a>
                 {{/if}}
-
-            <h1>
-                <a href="/">The Tech Blog</a>
-            </h1>
-
             </nav>
+              <h1 class="text-center">
+                <a href="/" class="nav-link">The Tech Blog</a>
+            </h1>
         </header>
         <main>
             {{!-- Hey, we're back to writing regular HTML again! Notice that there's a special placeholder in the <main>
@@ -38,9 +40,6 @@
                 case, the data will be another, smaller template, like the contents of the homepage. --}}
                 {{{body}}}
             </main>
-            <footer>
-                Thanks for visiting!
-            </footer>
     </div>
     {{!-- to be able to logout --}}
     {{!-- if user not logged in we don't need it script to through the error. --}}

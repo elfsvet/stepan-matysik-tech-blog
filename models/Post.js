@@ -19,11 +19,19 @@ Post.init(
         },
         title: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                // this means the title must be at least 1 character long
+                len: [1]
+            }
         },
         content: {
             type: DataTypes.TEXT,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                // this means the content must be at least 1 character long
+                len: [1]
+            }
         },
         user_id: {
             type: DataTypes.INTEGER,

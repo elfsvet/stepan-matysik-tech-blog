@@ -84,9 +84,12 @@ router.get('/edit/:id', withAuth, (req, res) => {
         });
 });
 
-router.get('/new-post', (req, res) => {
-    res.render('new-post');
+// open page to create a new post by clicking the +new Post button
+router.get('/new-post', withAuth, (req, res) => {
+    res.render('new-post',{ loggedIn: req.session.loggedIn});
 });
+
+
 
 
 module.exports = router;

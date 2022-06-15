@@ -7,7 +7,8 @@ router.get('/', (req, res) => {
     Comment.findAll(
         {
             attributes: ['id', 'comment_text', 'created_at', 'post_id', 'user_id'],
-            order: [['created_at', 'DESC']],
+           // to show the last post first
+           order: [['created_at', 'DESC']], 
             include: [
                 {
                     model: Post,

@@ -25,8 +25,9 @@ const sess = {
     // Super secret secret" should be replaced by an actual secret and stored in the .env file.
     secret: 'Super secret secret',
     // cookie object empty
-    // If we wanted to set additional options on the cookie, like a maximum age, we would add the options to that object.
-    cookie: {},
+    // !If we wanted to set additional options on the cookie, like a maximum age, we would add the options to that object.
+    // sets a idle timeout for the session to logout after the time
+    cookie: {maxAge: 1 * 60 * 60 * 1000 }, // 1 hours
     // resave set false forses back to be save int the session store
     resave: false,
     // save unitialialized true

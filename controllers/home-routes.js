@@ -60,7 +60,7 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-
+//  signup
 router.get('/signup', (req, res) => {
   // check for a session and redirect to the homepage if one exists by adding the following code:
   // if in object session loggedIn assign to true.
