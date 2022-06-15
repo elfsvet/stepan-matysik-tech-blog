@@ -12,7 +12,7 @@ router.get('/', withAuth, (req, res) => {
         },
         attributes: [
             'id',
-            'post_url',
+            'content',
             'title',
             'created_at'
         ],
@@ -49,7 +49,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
         where: {
             id: req.params.id
         },
-        attributes: ['id', 'post_url', 'title', 'created_at'],
+        attributes: ['id', 'content', 'title', 'created_at'],
         include: [
             // include the Comment model here:
             {
@@ -82,6 +82,10 @@ router.get('/edit/:id', withAuth, (req, res) => {
             console.log(err);
             res.status(500).json(err);
         });
+});
+
+router.get('/new-post', (req, res) => {
+    res.render('new-post');
 });
 
 

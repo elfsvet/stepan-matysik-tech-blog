@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
     console.log('=================')
     Post.findAll({
         // query configuration
-        attributes: ['id', 'post_url', 'title', 'created_at'],
+        attributes: ['id', 'content', 'title', 'created_at'],
         // to show the last post first
         order: [['created_at', 'DESC']], 
         // Notice that the include property is expressed as an array of objects. To define this object, we need a reference to the model and attributes. 
@@ -42,7 +42,7 @@ router.get('/:id', (req, res) => {
         where: {
             id: req.params.id
         },
-        attributes: ['id', 'post_url', 'title', 'created_at'],
+        attributes: ['id', 'content', 'title', 'created_at'],
         include: [
             // include the Comment model here:
             {
@@ -74,10 +74,10 @@ router.get('/:id', (req, res) => {
 
 // POST create one post 
 router.post('/', withAuth, (req, res) => {
-    // expects {title: 'Taskmaster goes public!', post_url: 'https://taskmaster.com/press', user_id: 1}
+    // expects {title: 'Taskmaster goes public!', content: 'https://taskmaster.com/press', user_id: 1}
     Post.create({
         title: req.body.title,
-        post_url: req.body.post_url,
+        content: req.body.content,
         // if you wnat to create a new post in insomnia need to change this id to body.id
         user_id: req.session.user_id
     })
@@ -88,12 +88,12 @@ router.post('/', withAuth, (req, res) => {
         });
 });
 
-// PUT update one post title. not the text to update text we would need to use individualHooks: true or add post_url: req.body.post_url after title.
+// PUT update one post title. not the text to update text we would need to use individualHooks: true or add content: req.body.content after title.
 router.put('/:id', withAuth, (req, res) => {
     Post.update(
         {
-            title: req.body.title
-            // , post_url: req.body.post_url
+            title: req.body.title,
+            content: req.body.content
         },
         {
             where: {

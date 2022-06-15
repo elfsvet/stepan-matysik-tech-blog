@@ -502,3 +502,19 @@ With this middleware in place, you can easily protect (i.e., authguard) other ro
 
 - Create an Edit Post Page
 - Hook Up the Front-End Logic
+
+In this lesson alone, you learned how to:
+
+Write your own middleware functions for Express.js.
+
+Use middleware to restrict access to certain routes.
+
+Looking back on the module as a whole, you also learned how to:
+
+Organize a codebase following the MVC paradigm.
+
+Create templates with Handlebars.js to reduce the amount of front-end JavaScript needed.
+
+Implement built-in and custom helpers in Handlebars.js to help with formatting.
+
+Store and use data saved on a back-end session.

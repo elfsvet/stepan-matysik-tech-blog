@@ -37,7 +37,7 @@ router.get('/:id', (req, res) => {
         include: [
             {
                 model: Post,
-                attributes: ['id', 'title', 'post_url', 'created_at']
+                attributes: ['id', 'title', 'content', 'created_at']
             },
             // include the Comment model here:
             {
@@ -148,6 +148,7 @@ router.post('/logout', withAuth, (req, res) => {
         res.status(404).end();
     }
 });
+
 
 
 // PUT /api/users/1

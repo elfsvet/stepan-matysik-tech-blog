@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
   Post.findAll({
     attributes: [
       'id',
-      'post_url',
+      'content',
       'title',
       'created_at'
     ],
@@ -60,6 +60,18 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+
+router.get('/signup', (req, res) => {
+  // check for a session and redirect to the homepage if one exists by adding the following code:
+  // if in object session loggedIn assign to true.
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+  // the difference here. we don't need to pass in any variables. that's why we don't use the second argument like we did in Post.findAll
+  res.render('signup');
+});
+
 // to get a single post 
 router.get('/post/:id', (req, res) => {
   Post.findOne({
@@ -68,7 +80,7 @@ router.get('/post/:id', (req, res) => {
     },
     attributes: [
       'id',
-      'post_url',
+      'content',
       'title',
       'created_at'
     ],

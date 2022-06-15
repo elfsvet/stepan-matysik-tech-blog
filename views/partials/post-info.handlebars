@@ -2,13 +2,17 @@
 {{!-- to use partial in other handlebars we can insert it by {{> name_of_the_partial argument_for_each_loop_set_up_in_partial }} --}}
 <article class="post">
   <div class="title">
-    <a href="{{post_url}}" target="_blank">{{title}}</a>
-    <span>({{format_url post_url}})</span>
+    {{!-- <a href="/dashboard/edit/{{id}}">{{title}}</a> --}}
+    <a href="/post/{{id}}">{{title}}</a>
+    <span>Posted by {{user.username}} on {{format_date created_at}}</span>
+    <div>
+
+    <p>{{content}}</p>
+
+    </div>
   </div>
   <div class="meta">
-    by {{user.username}} on
-    {{format_date created_at}}
-    |
+
     <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
   </div>
 </article>

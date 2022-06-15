@@ -10,14 +10,12 @@
 </head>
 
 <body>
-    <div class="wrapper">
+    <div>
         <header>
-            <h1>
-                <a href="/">The Tech Blog</a>
-            </h1>
             <nav>
                 <a href="/">Home</a>
-                {{!-- variables that are passed to view templates are automatically passed to the main layout. We did it in the single-post template --}}
+                {{!-- variables that are passed to view templates are automatically passed to the main layout. We did it
+                in the single-post template --}}
                 {{#if loggedIn}}
                 {{!-- a link to the dashboard page --}}
                 <a href="/dashboard">Dashboard</a>
@@ -27,6 +25,11 @@
                 {{else}}
                 <a href="/login">Login</a>
                 {{/if}}
+
+            <h1>
+                <a href="/">The Tech Blog</a>
+            </h1>
+
             </nav>
         </header>
         <main>
